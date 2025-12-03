@@ -6,7 +6,6 @@ class ProjectController {
   Future<List<Project>> fetchProjects() async {
     try {
       print('Fetching projects...');
-      // Using page_size=10 to fetch more items if available
       final response = await http.get(Uri.parse(
           'https://www.propstake.ai/api/dld?page=1&page_size=10&location_country=PK'));
 

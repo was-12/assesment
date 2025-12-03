@@ -15,7 +15,7 @@ class ProjectCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Image Gallery Section
+
           if (project.coverImageUrls.isNotEmpty)
             SizedBox(
               height: 250,
@@ -24,18 +24,18 @@ class ProjectCard extends StatelessWidget {
                 itemBuilder: (context, index) {
                   String imageUrl = project.coverImageUrls[index];
                   
-                  // Handle relative URLs and encode them properly
+
                   if (imageUrl.startsWith('/')) {
-                    // Split the URL to encode only the path part after /public/
+
                     final parts = imageUrl.split('/');
                     final encodedParts = parts.map((part) {
-                      // Don't encode the first empty part or 'public'
+
                       if (part.isEmpty || part == 'public') return part;
                       return Uri.encodeComponent(part);
                     }).join('/');
                     imageUrl = 'https://www.propstake.ai$encodedParts';
                   } else {
-                    // For absolute URLs, try to encode the path part
+
                     try {
                       final uri = Uri.parse(imageUrl);
                       imageUrl = uri.toString();
@@ -44,7 +44,7 @@ class ProjectCard extends StatelessWidget {
                     }
                   }
                   
-                  print('Loading image: $imageUrl'); // Debug log
+                  print('Loading image: $imageUrl');
                   
                   return Stack(
                     children: [
@@ -73,7 +73,7 @@ class ProjectCard extends StatelessWidget {
                             );
                           },
                           errorBuilder: (context, error, stackTrace) {
-                            print('Image load error for $imageUrl: $error'); // Debug log
+                            print('Image load error for $imageUrl: $error');
                             return Container(
                               height: 250,
                               color: Colors.grey.shade200,
@@ -133,7 +133,7 @@ class ProjectCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Title and Status
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -165,7 +165,7 @@ class ProjectCard extends StatelessWidget {
                 
                 const SizedBox(height: 12),
                 
-                // Location
+
                 Row(
                   children: [
                     const Icon(Icons.location_on, size: 16, color: Colors.grey),
@@ -181,7 +181,7 @@ class ProjectCard extends StatelessWidget {
                 
                 const SizedBox(height: 12),
                 
-                // Project Price
+
                 Text(
                   project.projectPrice,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -192,7 +192,7 @@ class ProjectCard extends StatelessWidget {
                 
                 const SizedBox(height: 16),
                 
-                // Units Information
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -208,7 +208,7 @@ class ProjectCard extends StatelessWidget {
                 
                 const SizedBox(height: 16),
                 
-                // Project Type and Building Type
+
                 Wrap(
                   spacing: 8,
                   runSpacing: 8,
@@ -228,7 +228,7 @@ class ProjectCard extends StatelessWidget {
                 
                 const SizedBox(height: 16),
                 
-                // Additional Information
+
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
@@ -249,7 +249,7 @@ class ProjectCard extends StatelessWidget {
                 
                 const SizedBox(height: 12),
                 
-                // All Image URLs
+
                 ExpansionTile(
                   title: const Text(
                     'All Cover Image URLs',
@@ -260,7 +260,7 @@ class ProjectCard extends StatelessWidget {
                     String url = entry.value;
                     String fullUrl;
                     
-                    // Apply same encoding logic as image display
+
                     if (url.startsWith('/')) {
                       final parts = url.split('/');
                       final encodedParts = parts.map((part) {

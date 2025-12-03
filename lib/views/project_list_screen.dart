@@ -48,7 +48,6 @@ class _ProjectListScreenState extends State<ProjectListScreen> {
           );
         },
       ),
-      // Floating Action Button
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.push(

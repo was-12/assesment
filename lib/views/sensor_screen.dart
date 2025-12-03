@@ -12,21 +12,17 @@ class SensorScreen extends StatefulWidget {
 }
 
 class _SensorScreenState extends State<SensorScreen> {
-  // Gyroscope data
   double _gyroX = 0.0;
   double _gyroY = 0.0;
   double _gyroZ = 0.0;
   
-  // Accelerometer data (additional sensor)
   double _accelX = 0.0;
   double _accelY = 0.0;
   double _accelZ = 0.0;
   
-  // Pedometer data
   int _stepCount = 0;
   String _pedometerStatus = 'Initializing...';
   
-  // Stream subscriptions
   StreamSubscription<GyroscopeEvent>? _gyroscopeSubscription;
   StreamSubscription<AccelerometerEvent>? _accelerometerSubscription;
   StreamSubscription<StepCount>? _stepCountSubscription;
@@ -38,10 +34,8 @@ class _SensorScreenState extends State<SensorScreen> {
   }
   
   Future<void> _initSensors() async {
-    // Request activity recognition permission for pedometer
     await _requestPermissions();
     
-    // Initialize gyroscope
     _gyroscopeSubscription = gyroscopeEventStream().listen(
       (GyroscopeEvent event) {
         setState(() {
@@ -55,7 +49,6 @@ class _SensorScreenState extends State<SensorScreen> {
       },
     );
     
-    // Initialize accelerometer
     _accelerometerSubscription = accelerometerEventStream().listen(
       (AccelerometerEvent event) {
         setState(() {
@@ -69,7 +62,6 @@ class _SensorScreenState extends State<SensorScreen> {
       },
     );
     
-    // Initialize pedometer
     _initPedometer();
   }
   
@@ -129,7 +121,6 @@ class _SensorScreenState extends State<SensorScreen> {
       },
     );
     
-    // Set a timeout to check if pedometer started
     Future.delayed(const Duration(seconds: 3), () {
       if (_pedometerStatus == 'Initializing...' || _pedometerStatus == 'Permission granted') {
         setState(() {
@@ -159,7 +150,6 @@ class _SensorScreenState extends State<SensorScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Header
             const Text(
               'Real-time Mobile Sensors',
               style: TextStyle(
@@ -180,7 +170,6 @@ class _SensorScreenState extends State<SensorScreen> {
             
             const SizedBox(height: 24),
             
-            // Enhanced Pedometer Card
             Card(
               elevation: 4,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -262,7 +251,6 @@ class _SensorScreenState extends State<SensorScreen> {
             
             const SizedBox(height: 24),
             
-            // Gyroscope Card
             _buildSensorCard(
               title: '🔄 Gyroscope',
               icon: Icons.screen_rotation,
@@ -276,7 +264,6 @@ class _SensorScreenState extends State<SensorScreen> {
             
             const SizedBox(height: 16),
             
-            // Accelerometer Card
             _buildSensorCard(
               title: '📱 Accelerometer',
               icon: Icons.vibration,
