@@ -180,19 +180,87 @@ class _SensorScreenState extends State<SensorScreen> {
             
             const SizedBox(height: 24),
             
-            // Pedometer Card
-            _buildSensorCard(
-              title: '🚶 Pedometer',
-              icon: Icons.directions_walk,
-              color: Colors.blue,
-              children: [
-                _buildDataRow('Step Count', _stepCount.toString(), Icons.trending_up),
-                const Divider(),
-                _buildDataRow('Status', _pedometerStatus, Icons.info_outline),
-              ],
+            // Enhanced Pedometer Card
+            Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Colors.blue.shade50,
+                      Colors.white,
+                    ],
+                  ),
+                ),
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.directions_walk, size: 32, color: Colors.blue.shade700),
+                        const SizedBox(width: 8),
+                        Text(
+                          'Step Count',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue.shade700,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      _stepCount.toString(),
+                      style: TextStyle(
+                        fontSize: 64,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue.shade900,
+                      ),
+                    ),
+                    const Text(
+                      'steps today',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: Colors.blue.shade100,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.info_outline, size: 16, color: Colors.blue.shade800),
+                          const SizedBox(width: 8),
+                          Flexible(
+                            child: Text(
+                              _pedometerStatus,
+                              style: TextStyle(
+                                color: Colors.blue.shade800,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
             
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
             
             // Gyroscope Card
             _buildSensorCard(
@@ -218,50 +286,6 @@ class _SensorScreenState extends State<SensorScreen> {
                 _buildDataRow('Y-axis', _accelY.toStringAsFixed(4), Icons.swap_vert),
                 _buildDataRow('Z-axis', _accelZ.toStringAsFixed(4), Icons.rotate_90_degrees_ccw),
               ],
-            ),
-            
-            const SizedBox(height: 24),
-            
-            // Info Card
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.grey.shade300),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Icon(Icons.info, color: Colors.blue.shade700),
-                      const SizedBox(width: 8),
-                      Text(
-                        'Sensor Information',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue.shade700,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  _buildInfoText('• Gyroscope measures rotation rate'),
-                  _buildInfoText('• Accelerometer measures device acceleration'),
-                  _buildInfoText('• Pedometer counts steps using motion sensors'),
-                  _buildInfoText('• All data updates in real-time'),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Note: Sensors work best on physical mobile devices',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontStyle: FontStyle.italic,
-                      color: Colors.grey.shade600,
-                    ),
-                  ),
-                ],
-              ),
             ),
           ],
         ),

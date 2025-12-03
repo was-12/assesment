@@ -40,6 +40,7 @@ class _ProjectListScreenState extends State<ProjectListScreen> {
           }
 
           return ListView.builder(
+            padding: const EdgeInsets.only(bottom: 100, top: 8, left: 8, right: 8),
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
               return ProjectCard(project: snapshot.data![index]);

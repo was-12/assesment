@@ -89,9 +89,9 @@
 - `ACTIVITY_RECOGNITION` in AndroidManifest.xml
 
 ### Navigation:
-- Two ways to access sensor screen:
-  1. "Sensors" button in AppBar
-  2. "View Sensors" floating action button
+- **Simplified Navigation**: 
+  - "View Sensors" floating action button (FAB) is the primary way to access sensors
+  - Clean AppBar with "Assessment" title (removed redundant button)
 
 ---
 
@@ -111,7 +111,7 @@
    ```
    flutter run -d 102752539E024336
    ```
-2. Click "Sensors" button or FAB
+2. Click "View Sensors" floating action button
 3. Move device to see gyroscope/accelerometer changes
 4. Walk to see step count increase
 5. All data updates in real-time
