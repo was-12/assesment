@@ -40,11 +40,12 @@ class ProjectCard extends StatelessWidget {
                       final uri = Uri.parse(imageUrl);
                       imageUrl = uri.toString();
                     } catch (e) {
-                      print('Error parsing URL: $e');
+                      // Error parsing URL
                     }
                   }
                   
-                  print('Loading image: $imageUrl');
+                  // Loading image
+
                   
                   return Stack(
                     children: [
@@ -73,7 +74,6 @@ class ProjectCard extends StatelessWidget {
                             );
                           },
                           errorBuilder: (context, error, stackTrace) {
-                            print('Image load error for $imageUrl: $error');
                             return Container(
                               height: 250,
                               color: Colors.grey.shade200,
@@ -85,7 +85,7 @@ class ProjectCard extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 16),
                                     child: Text(
-                                      'Image failed to load (CORS or 404)',
+                                      'Image failed to load',
                                       style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
                                       textAlign: TextAlign.center,
                                     ),

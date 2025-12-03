@@ -31,19 +31,22 @@ class Project {
 
   factory Project.fromJson(Map<String, dynamic> json) {
     return Project(
-      id: json['_id'] ?? '',
-      status: json['status'] ?? 'N/A',
-      title: json['title'] ?? 'No Title',
+      id: json['_id']?.toString() ?? '',
+      status: json['status']?.toString() ?? 'N/A',
+      title: json['title']?.toString() ?? 'No Title',
       location: Location.fromJson(json['location'] ?? {}),
-      projectType: json['projectType'] ?? '',
-      buildingType: json['buildingType'] ?? '',
-      projectPrice: json['projectPrice'] ?? 'Price on Request',
-      priceUnit: json['priceUnit'] ?? '',
-      coverImageUrls: List<String>.from(json['coverImageUrls'] ?? []),
-      totalUnits: json['totalUnits'] ?? 0,
-      unitPrice: json['unitPrice'] ?? 'N/A',
-      unitsSold: json['unitsSold'] ?? 0,
-      publishedAt: json['published_at'] ?? 'N/A',
+      projectType: json['projectType']?.toString() ?? '',
+      buildingType: json['buildingType']?.toString() ?? '',
+      projectPrice: json['projectPrice']?.toString() ?? 'Price on Request',
+      priceUnit: json['priceUnit']?.toString() ?? '',
+      coverImageUrls: (json['coverImageUrls'] as List<dynamic>?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [],
+      totalUnits: int.tryParse(json['totalUnits']?.toString() ?? '0') ?? 0,
+      unitPrice: json['unitPrice']?.toString() ?? 'N/A',
+      unitsSold: int.tryParse(json['unitsSold']?.toString() ?? '0') ?? 0,
+      publishedAt: json['published_at']?.toString() ?? 'N/A',
     );
   }
 }
@@ -56,8 +59,8 @@ class Location {
 
   factory Location.fromJson(Map<String, dynamic> json) {
     return Location(
-      city: json['city'] ?? 'Unknown City',
-      country: json['country'] ?? 'Unknown Country',
+      city: json['city']?.toString() ?? 'Unknown City',
+      country: json['country']?.toString() ?? 'Unknown Country',
     );
   }
 }

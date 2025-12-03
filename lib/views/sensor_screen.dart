@@ -45,7 +45,7 @@ class _SensorScreenState extends State<SensorScreen> {
         });
       },
       onError: (error) {
-        print('Gyroscope error: $error');
+        // Gyroscope error
       },
     );
     
@@ -58,7 +58,7 @@ class _SensorScreenState extends State<SensorScreen> {
         });
       },
       onError: (error) {
-        print('Accelerometer error: $error');
+        // Accelerometer error
       },
     );
     
@@ -68,11 +68,11 @@ class _SensorScreenState extends State<SensorScreen> {
   Future<void> _requestPermissions() async {
     try {
       final status = await Permission.activityRecognition.status;
-      print('Activity recognition permission status: $status');
+
       
       if (status.isDenied) {
         final result = await Permission.activityRecognition.request();
-        print('Permission request result: $result');
+
         
         if (result.isGranted) {
           setState(() {
@@ -89,7 +89,7 @@ class _SensorScreenState extends State<SensorScreen> {
         });
       }
     } catch (e) {
-      print('Permission error: $e');
+
       setState(() {
         _pedometerStatus = 'Permission error';
       });
@@ -97,24 +97,24 @@ class _SensorScreenState extends State<SensorScreen> {
   }
   
   void _initPedometer() {
-    print('Initializing pedometer...');
+
     
     _stepCountSubscription = Pedometer.stepCountStream.listen(
       (StepCount event) {
-        print('Step count received: ${event.steps}');
+
         setState(() {
           _stepCount = event.steps;
           _pedometerStatus = 'Tracking - ${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}';
         });
       },
       onError: (error) {
-        print('Pedometer error: $error');
+
         setState(() {
           _pedometerStatus = 'Not available on this device';
         });
       },
       onDone: () {
-        print('Pedometer stream done');
+
         setState(() {
           _pedometerStatus = 'Stream ended';
         });
